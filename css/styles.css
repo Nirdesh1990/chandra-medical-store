@@ -1,0 +1,388 @@
+/* ==========================================================================
+   Chandra Medical Store
+   Palette taken from the shop's own signboard: navy + medicine green,
+   with marigold reserved for one band only.
+   ========================================================================== */
+
+:root{
+  --ink:        #10233F;   /* signboard navy — structure, hero ground */
+  --ink-soft:   #1B3760;
+  --leaf:       #1B7A4B;   /* signboard green — WhatsApp, accents */
+  --leaf-deep:  #0F5233;
+  --marigold:   #E08A1E;   /* the discount band, nowhere else */
+  --paper:      #FAFBFC;
+  --mint:       #E9EFEC;   /* quiet panels */
+  --line:       #D2DCE4;
+  --body:       #2C3A4A;
+  --muted:      #5B6B7C;
+
+  --shell: 1180px;
+  --pad: clamp(1.15rem, 5vw, 2.5rem);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--body);
+  font-family:"Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size:clamp(1rem, .96rem + .2vw, 1.075rem);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+img, svg, iframe{ display:block; max-width:100%; }
+a{ color:inherit; }
+
+h1,h2,h3{
+  font-family:"Fraunces", Georgia, serif;
+  font-weight:600;
+  line-height:1.12;
+  letter-spacing:-.015em;
+  color:var(--ink);
+  margin:0;
+  text-wrap:balance;
+}
+
+.hi, .hi-s, .band-hi, .foot-name span{
+  font-family:"Noto Sans Devanagari", "Inter Tight", sans-serif;
+}
+
+.wrap{
+  width:100%;
+  max-width:var(--shell);
+  margin-inline:auto;
+  padding-inline:var(--pad);
+}
+
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:99;
+  background:#fff; color:var(--ink); padding:.7rem 1rem; font-weight:600;
+}
+.skip:focus{ left:.5rem; top:.5rem; }
+
+:focus-visible{ outline:3px solid var(--marigold); outline-offset:3px; border-radius:2px; }
+
+/* ---------- buttons ---------------------------------------------------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.82rem 1.35rem;
+  border-radius:3px;
+  font-weight:600;
+  font-size:1rem;
+  text-decoration:none;
+  border:2px solid transparent;
+  transition:background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+.btn .ico{ width:1.15em; height:1.15em; flex:none; }
+
+.btn-call{ background:#fff; color:var(--ink); border-color:#fff; }
+.btn-call:hover{ background:var(--marigold); border-color:var(--marigold); color:#fff; }
+
+.btn-wa{ background:var(--leaf); color:#fff; border-color:var(--leaf); }
+.btn-wa:hover{ background:var(--leaf-deep); border-color:var(--leaf-deep); }
+
+/* ---------- top bar ---------------------------------------------------- */
+.bar{
+  position:sticky; top:0; z-index:40;
+  background:var(--ink);
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.bar-in{
+  display:flex; align-items:center; gap:1.5rem;
+  min-height:64px;
+}
+.mark{
+  display:flex; align-items:center; gap:.65rem;
+  text-decoration:none; color:#fff; margin-right:auto;
+}
+.mark-cross{ width:26px; height:26px; color:var(--leaf); flex:none; }
+.mark-cross svg{ width:100%; height:100%; }
+.mark-text b{
+  display:block; font-family:"Fraunces",Georgia,serif;
+  font-size:1.08rem; font-weight:600; letter-spacing:-.01em; line-height:1.15;
+}
+.mark-text i{
+  display:block; font-style:normal; font-size:.78rem;
+  color:rgba(255,255,255,.62); letter-spacing:.02em;
+}
+.bar-nav{ display:flex; gap:1.6rem; }
+.bar-nav a{
+  color:rgba(255,255,255,.8); text-decoration:none; font-size:.95rem; font-weight:500;
+  padding-block:.3rem; border-bottom:2px solid transparent;
+}
+.bar-nav a:hover{ color:#fff; border-bottom-color:var(--leaf); }
+
+.bar-call{ padding:.6rem 1rem; font-size:.95rem; }
+
+@media (max-width: 860px){
+  .bar-nav{ display:none; }
+}
+@media (max-width: 560px){
+  .bar-call{ display:none; }
+  .mark-text b{ font-size:1rem; }
+}
+
+/* ---------- hero ------------------------------------------------------- */
+.hero{
+  background:var(--ink);
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{            /* a single quiet green rule, echoing the signboard */
+  content:""; position:absolute; left:0; right:0; bottom:0; height:5px;
+  background:linear-gradient(90deg, var(--leaf) 0 55%, var(--marigold) 55% 100%);
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,.9fr);
+  gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:center;
+  padding-block:clamp(2.5rem,6vw,4.5rem) clamp(2.5rem,6vw,4rem);
+}
+.hero h1{
+  color:#fff;
+  font-size:clamp(2.1rem, 1.4rem + 3.1vw, 3.9rem);
+  font-weight:600;
+  margin:.55rem 0 0;
+  max-width:16ch;
+}
+.hero-age{
+  display:flex; align-items:center; gap:.7rem;
+  margin:0;
+}
+.hero-age-num{
+  font-family:"Fraunces",Georgia,serif;
+  font-size:3.3rem; font-weight:700; line-height:.85;
+  color:var(--marigold);
+  letter-spacing:-.04em;
+}
+.hero-age-txt{
+  font-size:.86rem; line-height:1.3; color:rgba(255,255,255,.72);
+  border-left:1px solid rgba(255,255,255,.28); padding-left:.7rem;
+}
+.hero .hi{
+  color:#9FD7B8;
+  font-size:clamp(1rem,.95rem+.35vw,1.2rem);
+  margin:1rem 0 0;
+  line-height:1.6;
+}
+.hero-sub{
+  color:rgba(255,255,255,.8);
+  max-width:46ch;
+  margin:1rem 0 0;
+}
+.hero-acts{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.9rem; }
+.hero-note{
+  font-size:.88rem; color:rgba(255,255,255,.58);
+  max-width:44ch; margin:1.1rem 0 0;
+}
+
+.hero-photo{ margin:0; position:relative; }
+.hero-photo img{
+  width:100%; height:auto; border-radius:3px;
+  object-fit:cover;
+  box-shadow:0 18px 50px rgba(0,0,0,.35);
+}
+.hero-photo figcaption{
+  background:#fff; color:var(--ink);
+  padding:.75rem 1rem;
+  border-left:5px solid var(--leaf);
+  max-width:19rem;
+  margin-top:-2.2rem; margin-left:1.1rem;
+  position:relative;
+  box-shadow:0 10px 26px rgba(0,0,0,.24);
+}
+.hero-photo figcaption b{ display:block; font-size:1.02rem; }
+.hero-photo figcaption span{ display:block; font-size:.79rem; color:var(--muted); line-height:1.4; }
+
+@media (max-width: 880px){
+  .hero-grid{ grid-template-columns:1fr; }
+  .hero-photo{ order:-1; }
+  .hero-photo figcaption{ margin-left:0; max-width:none; }
+}
+
+/* ---------- section furniture ------------------------------------------ */
+.sec-h{
+  font-size:clamp(1.6rem, 1.25rem + 1.5vw, 2.4rem);
+  max-width:20ch;
+}
+.sec-lede{
+  color:var(--muted);
+  max-width:56ch;
+  margin:.9rem 0 0;
+}
+
+.stock{ padding-block:clamp(3rem,7vw,5rem); }
+
+.counter{
+  margin-top:clamp(2rem,4vw,3rem);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:2px solid var(--ink);
+}
+.counter-item{
+  padding:1.8rem 1.6rem 1.6rem 0;
+  border-right:1px solid var(--line);
+}
+.counter-item:last-child{ border-right:0; padding-right:0; }
+.counter-item:not(:first-child){ padding-left:1.6rem; }
+
+.counter-ico{ display:block; width:36px; height:36px; color:var(--leaf); }
+.counter-ico svg{ width:100%; height:100%; }
+.counter-item h3{
+  font-size:1.3rem; margin:.85rem 0 .5rem;
+  display:flex; align-items:baseline; gap:.5rem; flex-wrap:wrap;
+}
+.hi-s{
+  font-size:.82rem; font-weight:500; color:var(--leaf-deep);
+  font-family:"Noto Sans Devanagari",sans-serif;
+}
+.counter-item p{ margin:0; font-size:.96rem; color:var(--muted); }
+
+@media (max-width: 760px){
+  .counter{ grid-template-columns:1fr; }
+  .counter-item{
+    border-right:0; border-bottom:1px solid var(--line);
+    padding:1.4rem 0;
+  }
+  .counter-item:not(:first-child){ padding-left:0; }
+  .counter-item:last-child{ border-bottom:0; }
+}
+
+/* ---------- discount band ---------------------------------------------- */
+.band{ background:var(--marigold); color:#3A2404; }
+.band-in{
+  display:grid; grid-template-columns:1.1fr .9fr;
+  gap:clamp(1.5rem,4vw,3.5rem);
+  padding-block:clamp(2.6rem,5vw,3.6rem);
+  align-items:start;
+}
+.band h2{ color:#3A2404; font-size:clamp(1.55rem,1.2rem+1.4vw,2.2rem); max-width:18ch; }
+.band p{ margin:.9rem 0 0; max-width:48ch; color:#54360A; }
+.band .band-hi{ font-weight:500; color:#3A2404; }
+.band-list{ list-style:none; margin:0; padding:0; }
+.band-list li{
+  padding:.75rem 0 .75rem 1.9rem;
+  border-top:1px solid rgba(58,36,4,.22);
+  font-size:.95rem;
+  position:relative;
+}
+.band-list li:last-child{ border-bottom:1px solid rgba(58,36,4,.22); }
+.band-list li::before{
+  content:""; position:absolute; left:.25rem; top:1.28rem;
+  width:9px; height:9px; background:#3A2404; border-radius:50%;
+}
+@media (max-width: 760px){ .band-in{ grid-template-columns:1fr; } }
+
+/* ---------- trust ------------------------------------------------------ */
+.trust{ padding-block:clamp(3rem,7vw,5rem); }
+.trust-list{
+  margin:clamp(1.8rem,4vw,2.8rem) 0 0;
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:0 clamp(2rem,5vw,4rem);
+}
+.trust-list > div{
+  padding:1.5rem 0;
+  border-top:1px solid var(--line);
+}
+.trust-list dt{
+  font-family:"Fraunces",Georgia,serif;
+  font-size:1.18rem; font-weight:600; color:var(--ink);
+  margin-bottom:.4rem;
+}
+.trust-list dd{ margin:0; color:var(--muted); font-size:.97rem; max-width:46ch; }
+@media (max-width: 760px){ .trust-list{ grid-template-columns:1fr; } }
+
+/* ---------- visit ------------------------------------------------------ */
+.visit{ background:var(--mint); padding-block:clamp(3rem,7vw,5rem); }
+.visit-grid{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:clamp(1.8rem,4vw,3.5rem); align-items:start;
+}
+.detail{ margin:clamp(1.6rem,3vw,2.2rem) 0 0; }
+.detail dt{
+  font-size:.78rem; font-weight:600; color:var(--leaf-deep);
+  letter-spacing:.04em; margin-top:1.25rem;
+}
+.detail dt:first-child{ margin-top:0; }
+.detail dd{
+  margin:.25rem 0 0; font-size:1.06rem; color:var(--ink); line-height:1.5;
+}
+.detail a{ color:var(--ink); text-decoration-color:var(--leaf); text-underline-offset:3px; }
+.edit-flag{
+  display:inline-block; font-size:.7rem; background:#fff; color:#B3400E;
+  border:1px dashed #B3400E; padding:.05rem .4rem; border-radius:2px;
+  vertical-align:middle; margin-left:.35rem;
+}
+.visit-acts{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2rem; }
+.visit .btn-call{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.visit .btn-call:hover{ background:var(--marigold); border-color:var(--marigold); }
+
+.visit-map{
+  border:6px solid #fff;
+  box-shadow:0 12px 32px rgba(16,35,63,.13);
+  min-height:340px; height:100%;
+}
+.visit-map iframe{ width:100%; height:100%; min-height:328px; border:0; }
+@media (max-width: 760px){ .visit-grid{ grid-template-columns:1fr; } }
+
+/* ---------- advertisement ---------------------------------------------- */
+.ad{ background:var(--ink); color:#fff; padding-block:clamp(2.8rem,6vw,4rem); }
+.ad-in{ max-width:60ch; }
+.ad-tag{
+  margin:0 0 .9rem; font-size:.73rem; color:rgba(255,255,255,.5);
+  border:1px solid rgba(255,255,255,.28); display:inline-block;
+  padding:.12rem .55rem; border-radius:2px; letter-spacing:.06em;
+}
+.ad h2{ color:#fff; font-size:clamp(1.5rem,1.2rem+1.2vw,2.05rem); }
+.ad p{ color:rgba(255,255,255,.76); margin:.9rem 0 0; }
+.ad-act{ margin-top:1.6rem; }
+.btn-ad{ background:var(--leaf); color:#fff; border-color:var(--leaf); }
+.btn-ad:hover{ background:#fff; color:var(--ink); border-color:#fff; }
+
+/* ---------- footer ----------------------------------------------------- */
+.foot{ background:#0A1729; color:rgba(255,255,255,.62); padding-block:2.6rem 6rem; font-size:.9rem; }
+.foot-name{
+  font-family:"Fraunces",Georgia,serif; color:#fff; font-size:1.25rem; margin:0;
+}
+.foot-name span{
+  display:block; font-size:.85rem; color:#9FD7B8; margin-top:.2rem; font-family:"Noto Sans Devanagari",sans-serif;
+}
+.foot-meta{ margin:.9rem 0 0; }
+.foot-legal{ margin:1.1rem 0 0; font-size:.8rem; color:rgba(255,255,255,.42); max-width:62ch; }
+.foot-credit{ margin:1.4rem 0 0; font-size:.82rem; }
+.foot a{ color:#fff; text-decoration-color:var(--leaf); text-underline-offset:3px; }
+
+/* ---------- phone dock -------------------------------------------------- */
+.dock{
+  position:fixed; left:0; right:0; bottom:0; z-index:50;
+  display:none; grid-template-columns:1fr 1fr;
+  box-shadow:0 -6px 20px rgba(16,35,63,.22);
+}
+.dock-btn{
+  padding:1rem; text-align:center; font-weight:600; text-decoration:none; color:#fff;
+}
+.dock-call{ background:var(--ink); }
+.dock-wa{ background:var(--leaf); }
+@media (max-width: 560px){
+  .dock{ display:grid; }
+}
+
+/* ---------- one load reveal, nothing else moves ------------------------- */
+.js .reveal{ opacity:0; transform:translateY(14px); }
+.js .revealed .reveal{
+  animation:rise .62s cubic-bezier(.2,.7,.3,1) forwards;
+  animation-delay:calc(var(--d, 0) * 95ms);
+}
+@keyframes rise{ to{ opacity:1; transform:none; } }
+
+@media (prefers-reduced-motion: reduce){
+  .js .reveal{ opacity:1; transform:none; }
+  .js .revealed .reveal{ animation:none; }
+}
